@@ -5,7 +5,8 @@
     "outDir": "./dist",
 
     // Environment Settings
-    "module": "CommonJS",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ES2022",
     "types": [],
    
@@ -33,6 +34,6 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   }
 }
