@@ -40,3 +40,17 @@ export function greek_exist(str: string): boolean {
     return false;
 }
 
+// Rule 5
+export function country_exist(str: string, country: string): boolean {
+    const regex = new RegExp(country, "i");
+    const has_country = regex.test(str);
+    
+    if (has_country) {
+        return true;
+    }
+
+    return false;
+}
+
+
+

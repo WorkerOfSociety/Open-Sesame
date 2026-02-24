@@ -1,12 +1,48 @@
-import { uppercase_exist } from "../lib/rules"
+import { uppercase_exist, special_exist, minimum_8, greek_exist, country_exist } from "../lib/rules"
+
+const empty = "";
 
 describe("Testing rules check functions", () => {
     test("Testing uppercase", () => {
-        const empty = "";
         const undercase = "dgasuidgasudg";
         const uppercase = "asdasgdasGTYUdasdasd";
         expect(uppercase_exist(empty)).toBeFalsy();
         expect(uppercase_exist(undercase)).toBeFalsy();
         expect(uppercase_exist(uppercase)).toBeTruthy();
     });    
+
+    test("Testinag special chars", () => {
+        const non_special = "dnaskjdbhnaiwue";
+        const special = "Isak!";
+        expect(special_exist(empty)).toBeFalsy();
+        expect(special_exist(non_special)).toBeFalsy();
+        expect(special_exist(special)).toBeTruthy();
+    });
+
+    test("Testing minimun 8", () => {
+        const under = "dsahd";
+        const exact = "dksngofö";
+        const over = "afsilufhasiuf";
+        expect(minimum_8(empty)).toBeFalsy();
+        expect(minimum_8(under)).toBeFalsy();
+        expect(minimum_8(exact)).toBeTruthy();
+        expect(minimum_8(over)).toBeTruthy();
+    });
+
+    test("Testing greek exist", () => {
+        const no_greek = "dsiahd";
+        const greek = "dasfiddβfyas";
+        expect(greek_exist(empty)).toBeFalsy();
+        expect(greek_exist(no_greek)).toBeFalsy();
+        expect(greek_exist(greek)).toBeTruthy();
+    });
+
+    test("Country exist", () => {
+        const no_country = "asdfhdasiu";
+        const country = "Japan";
+        const cuontry_plus = "kjdshadikshaSwedenIOSGHDIP";
+        expect(country_exist(empty)).toBeFalsy();
+        expect(country_exist(country)).toBeTruthy();
+        expect(country_exist(country_plus)).toBeTruthy();
+    });
 });
