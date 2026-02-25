@@ -21,7 +21,7 @@ export function special_exist(str: string): boolean {
 }
 
 // Rule 3
-export function minimun_8(str: string): boolean {
+export function minimum_8(str: string): boolean {
     if (str.length >= 8) {
         return true;
     }

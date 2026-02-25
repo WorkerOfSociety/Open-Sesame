@@ -40,9 +40,10 @@ describe("Testing rules check functions", () => {
     test("Country exist", () => {
         const no_country = "asdfhdasiu";
         const country = "Japan";
-        const cuontry_plus = "kjdshadikshaSwedenIOSGHDIP";
-        expect(country_exist(empty)).toBeFalsy();
-        expect(country_exist(country)).toBeTruthy();
-        expect(country_exist(country_plus)).toBeTruthy();
+        const country_plus = "kjdshadikshaSwedenIOSGHDIP";
+        expect(country_exist(empty, "Taiwan")).toBeFalsy();
+        expect(country_exist(no_country, "Frankrike"))
+        expect(country_exist(country, "japan")).toBeTruthy();
+        expect(country_exist(country_plus, "Sweden")).toBeTruthy();
     });
 });

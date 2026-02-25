@@ -19,7 +19,7 @@ function get_country_url(country: string): string {
 
     const place_id = get_place_id();
 
-    const boundary_url = `https://api.geoapify.com/v1/boundaries/consists-of?id=$(place_id)&geometry=geometry_1000&apiKey=${GEOCODE_API_KEY}`;
+    const boundary_url = `https://api.geoapify.com/v1/boundaries/consists-of?id=${place_id}&geometry=geometry_1000&apiKey=${GEOCODE_API_KEY}`;
 
     const boundary_response = await fetch(boundary_url);
     const boundary_json = await boundary_response.json();
