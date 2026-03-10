@@ -33,24 +33,27 @@ export default function App() {
 
   const [RulesFinished, setRulesFinished] = useState(1)
 
-  
-
+  // an array for each rules function and the description that appears in
+  // the rules box on the site.
   const ruleDisplay: Rule[] = [
   { fn: minimum_8, description: 'Must be at least 8 characters' },
   { fn: uppercase_exist, description: 'Must contain an uppercase letter' },
   { fn: number_exist, description: 'Must contain a number'},
   { fn: special_exist, description: 'Must contain a special character' },
   { fn: greek_exist, description: 'Must contain a Greek letter' },
-  { fn: (str: string) => country_exist(str, country), description: 'Must contain the name of the country shown above', showMap: true},
+  { fn: (str: string) => country_exist(str, country), description: 'which of these countries is this map from? Brazil, Canada, Egypt, Japan, Sweden', showMap: true},
   { fn: contain_dev, description: 'Who do you like more? Felix, Isak, or Isaac?'},
-  { fn: (_: string) => videoValid, description: 'Must enter a video of 15s length'},
-  { fn: (_: string) => true, description: 'Your password is strong enough Well done!', finalRule: true }
-   ]
+  { fn: (_: string) => videoValid, description: 'Enter a youtube video link of 15 seconds at the end'},
+  { fn: (_: string) => true, description: 'Your password is strong enough Well done!', finalRule: true }]
 
+  // uses the video_exist function to check if the youtube link is valid
+  // and is as long as we request.
   useEffect(() => {
   video_exist(password, 15).then(result => setVideoValid(result))
   }, [password])
 
+  // randomizes which of the countries from the countries array that 
+  // the map generates.
   useEffect(() => {
   const countries = ['Sweden', 'Brazil', 'Japan', 'Egypt', 'Canada']
   const picked = countries[Math.floor(Math.random() * countries.length)]!
@@ -58,6 +61,8 @@ export default function App() {
   get_country_url(picked).then(url => setMapUrl(url))
   }, [])
 
+  // takes out the rule function from ruleDisplay.
+  // also checks if all rules up till the amount of rules finished are correct.
   useEffect(() => {
     const rules = ruleDisplay.map(rule => rule.fn)
     let identifier = true
@@ -72,6 +77,8 @@ export default function App() {
     }
   }, [password, RulesFinished])
 
+  // creates the typing animation for the text when site is launched and
+  // keeps everything else invisible until the animation is done.
   useEffect(() => {
     const texts = [
       { set: setTitle, text: fullTitle, speed: 150 },
@@ -98,12 +105,15 @@ export default function App() {
     typeText(0)
   }, [])
 
+  // triggers remapKeys when the 5th rule is completed.
   useEffect(() => {
     if (RulesFinished === 5) {
     setPassword(prev => remapKeys(prev))
     }
   }, [RulesFinished])
 
+  // triggers the spreadFire rule when the 6th rule is completed and
+  // if the fire hasnt been already done before.
   useEffect(() => {
     console.log('RulesFinished:', RulesFinished, 'fireDone:', fireDone)
     if (RulesFinished === 6 && !fireDone) {
@@ -114,6 +124,8 @@ export default function App() {
     }
   }, [RulesFinished])
 
+  // uses the spreadFire function to spread the fire, and stops once the
+  // fire has been put
   useEffect(() => {
     if (!onFire) return
     const interval = setInterval(() => {
@@ -168,7 +180,6 @@ export default function App() {
           style={{
           opacity: typingDone ? 1: 0
           }}>
-            
         {ruleDisplay.slice(0, RulesFinished).reverse().map((rule) => (
         <div key={rule.description}>
           {rule.showMap && mapUrl && (
