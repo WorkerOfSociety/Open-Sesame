@@ -1,9 +1,10 @@
 import './styling.css'
 import { useState, useEffect } from "react"
-import { uppercase_exist, special_exist, minimum_8, greek_exist,
-  country_exist, video_exist, remapKeys, contain_dev, spreadFire,
-  number_exist } from "../lib/rules"
-import { get_country_url } from "./utils"
+import { 
+  uppercase_exist, special_exist, minimum_8, greek_exist,
+  country_exist, video_exist, contain_dev, number_exist 
+} from "../lib/rules"
+import { get_country_url, spreadFire, remapKeys } from "./utils"
 const fullTitle = 'Open Sesamee'
 const fullSubtitle = 'a game not at all inspired by The Password Game'
 const fullLabel = 'Please enter your password:'
@@ -44,21 +45,21 @@ export default function App() {
   { fn: (str: string) => country_exist(str, country), description: 'which of these countries is this map from? Brazil, Canada, Egypt, Japan, Sweden', showMap: true},
   { fn: contain_dev, description: 'Who do you like more? Felix, Isak, or Isaac?'},
   { fn: (_: string) => videoValid, description: 'Enter a youtube video link of 15 seconds at the end'},
-  { fn: (_: string) => true, description: 'Your password is strong enough Well done!', finalRule: true }]
+  { fn: (_: string) => true, description: 'Your password is strong enough, Well done!', finalRule: true }]
 
   // uses the video_exist function to check if the youtube link is valid
   // and is as long as we request.
   useEffect(() => {
-  video_exist(password, 15).then(result => setVideoValid(result))
+    video_exist(password, 15).then(result => setVideoValid(result))
   }, [password])
 
   // randomizes which of the countries from the countries array that 
   // the map generates.
   useEffect(() => {
-  const countries = ['Sweden', 'Brazil', 'Japan', 'Egypt', 'Canada']
-  const picked = countries[Math.floor(Math.random() * countries.length)]!
-  setCountry(picked)
-  get_country_url(picked).then(url => setMapUrl(url))
+    const countries = ['Sweden', 'Brazil', 'Japan', 'Egypt', 'Canada']
+    const picked = countries[Math.floor(Math.random() * countries.length)]!
+    setCountry(picked)
+    get_country_url(picked).then(url => setMapUrl(url))
   }, [])
 
   // takes out the rule function from ruleDisplay.

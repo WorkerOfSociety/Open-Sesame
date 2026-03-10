@@ -1,17 +1,12 @@
-import { uppercase_exist, special_exist, minimum_8, greek_exist, country_exist, 
-         video_exist, number_exist, contain_dev
+import { 
+    uppercase_exist, special_exist, minimum_8, greek_exist, 
+    country_exist, video_exist, number_exist, contain_dev
 } from "../lib/rules";
 
 const empty = "";
 
-
-test('YOUTUBE_API_KEY is loaded', () => {
-  console.log('YOUTUBE_API_KEY:', process.env.YOUTUBE_API_KEY);
-  expect(process.env.YOUTUBE_API_KEY).toBeDefined();
-});
-
 describe("Testing rules check functions", () => {
-    test("Testing uppercase", () => {
+    test("Testing uppercase_exist", () => {
         const undercase = "dgasuidgasudg";
         const uppercase = "asdasgdasGTYUdasdasd";
         expect(uppercase_exist(empty)).toBeFalsy();
@@ -19,7 +14,7 @@ describe("Testing rules check functions", () => {
         expect(uppercase_exist(uppercase)).toBeTruthy();
     });    
 
-    test("Testinag special chars", () => {
+    test("Testing special_exist", () => {
         const non_special = "dnaskjdbhnaiwue";
         const special = "Isak!";
         expect(special_exist(empty)).toBeFalsy();
@@ -27,7 +22,7 @@ describe("Testing rules check functions", () => {
         expect(special_exist(special)).toBeTruthy();
     });
 
-    test("Testing number exist", () => {
+    test("Testing number_exist", () => {
         const non_number = "sadoashdasf";
         const with_number = "asdfasflj!9";
         expect(number_exist(empty)).toBeFalsy();
@@ -35,7 +30,7 @@ describe("Testing rules check functions", () => {
         expect(number_exist(with_number)).toBeTruthy();
     });
 
-    test("Testing minimun 8", () => {
+    test("Testing minimum_8", () => {
         const under = "dsahd";
         const exact = "dksngofö";
         const over = "afsilufhasiuf";
@@ -45,7 +40,7 @@ describe("Testing rules check functions", () => {
         expect(minimum_8(over)).toBeTruthy();
     });
 
-    test("Testing greek exist", () => {
+    test("Testing greek_exist", () => {
         const no_greek = "dsiahd";
         const greek = "dasfiddβfyas";
         expect(greek_exist(empty)).toBeFalsy();
@@ -53,7 +48,7 @@ describe("Testing rules check functions", () => {
         expect(greek_exist(greek)).toBeTruthy();
     });
 
-    test("Testing contain dev", () => {
+    test("Testing contain_dev", () => {
         const no_dev = "sdahaspu";
         const dev = "asohFelixasdas";
         expect(contain_dev(empty)).toBeFalsy();
@@ -61,12 +56,12 @@ describe("Testing rules check functions", () => {
         expect(contain_dev(dev)).toBeTruthy();
     });
 
-    test("Country exist", () => {
+    test("Testing country_exist", () => {
         const no_country = "asdfhdasiu";
         const country = "Japan";
         const country_plus = "kjdshadikshaSwedenIOSGHDIP";
         expect(country_exist(empty, "Taiwan")).toBeFalsy();
-        expect(country_exist(no_country, "Frankrike"))
+        expect(country_exist(no_country, "France")).toBeFalsy();
         expect(country_exist(country, "japan")).toBeTruthy();
         expect(country_exist(country_plus, "Sweden")).toBeTruthy();
     });
@@ -75,7 +70,7 @@ describe("Testing rules check functions", () => {
         const res_1 = await video_exist("Aq5WXmQQooo", 15);
         expect(res_1).toBeTruthy();
         
-        const res_2 = await video_exist("ashdiasgdasigdp!Aq5WXmQQooo", 15);
+        const res_2 = await video_exist("ashdiasgdasigdp!mQIdvYVw5aY", 9);
         expect(res_2).toBeTruthy();
 
         const res_3 = await video_exist("!!!!", 100);

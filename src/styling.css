@@ -13,9 +13,9 @@ body {
 #gameSubtitle {
   color: #3f2e5b;
   margin-top: -2vh;
+  padding-bottom: 3vh;
   font-size: 30px;
   font-family: Georgia, serif;
-  padding-bottom: 3vh;
 }
 
 #passwordLabel {
