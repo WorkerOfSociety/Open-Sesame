@@ -1,11 +1,11 @@
 import { 
     uppercase_exist, special_exist, minimum_8, greek_exist, 
     country_exist, video_exist, number_exist, contain_dev
-} from "../lib/rules";
+} from "./ONLY_FOR_TESTING_rules";
 
 import {
     remapKeys, spreadFire
-} from "../src/utils";
+} from "./ONLY_FOR_TESTING_utils";
 
 const empty = "";
 
@@ -79,7 +79,7 @@ describe("Testing rules check functions", () => {
 
         const res_3 = await video_exist("!!!!", 100);
         expect(res_3).toBeFalsy();
-    })
+    });
 });
 
 describe("Testing the utils.ts file", () => {
@@ -97,14 +97,10 @@ describe("Testing the utils.ts file", () => {
         const str_1 = "sajkSdgas!wSldg";
         const str_1_fire = spreadFire(str_1);
         const fire_count = (str_1_fire.match(/🔥/g) || []).length;
-        console.log(str_1_fire);
-        console.log(fire_count);
         expect(fire_count).toBe(1);
 
         const str_2 = spreadFire(str_1_fire);
-        console.log(str_2);
         const fire_count_2 = (str_2.match(/🔥/g) || []).length;
-        console.log(fire_count_2);
         expect([2, 3]).toContain(fire_count_2);
     });
 });
