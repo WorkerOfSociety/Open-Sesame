@@ -3,6 +3,10 @@ import {
     country_exist, video_exist, number_exist, contain_dev
 } from "../lib/rules";
 
+import {
+    remapKeys, spreadFire
+} from "../src/utils";
+
 const empty = "";
 
 describe("Testing rules check functions", () => {
@@ -66,7 +70,7 @@ describe("Testing rules check functions", () => {
         expect(country_exist(country_plus, "Sweden")).toBeTruthy();
     });
 
-    test("YOUTUBE API", async () => {
+    test("Testing video_exist", async () => {
         const res_1 = await video_exist("Aq5WXmQQooo", 15);
         expect(res_1).toBeTruthy();
         
@@ -76,4 +80,31 @@ describe("Testing rules check functions", () => {
         const res_3 = await video_exist("!!!!", 100);
         expect(res_3).toBeFalsy();
     })
+});
+
+describe("Testing the utils.ts file", () => {
+    test("Testing remapKeys", () => {
+        const str_1 = "aaabbcp11111";
+        const str_1_expected = "bbb11cpaaaaa";
+        expect(remapKeys(str_1)).toStrictEqual(str_1_expected);
+
+        const str_2 = "hhuuhuu11a";
+        const str_2_expected = "11hh1hhuua";
+        expect(remapKeys(str_2)).toStrictEqual(str_2_expected);
+    });
+
+    test("Testing spreadFire", () => {
+        const str_1 = "sajkSdgas!wSldg";
+        const str_1_fire = spreadFire(str_1);
+        const fire_count = (str_1_fire.match(/🔥/g) || []).length;
+        console.log(str_1_fire);
+        console.log(fire_count);
+        expect(fire_count).toBe(1);
+
+        const str_2 = spreadFire(str_1_fire);
+        console.log(str_2);
+        const fire_count_2 = (str_2.match(/🔥/g) || []).length;
+        console.log(fire_count_2);
+        expect([2, 3]).toContain(fire_count_2);
+    });
 });
